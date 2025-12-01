@@ -545,60 +545,162 @@
         </div>
     </div>
 
-    <!-- STEP 5: 몽타주 생성 + 패들렛 공유 -->
-    <div class="step" id="step5">
-        <div class="card screen-card">
-            <div>
-                <div class="badge">🖼 LEVEL 5. 몽타주 생성 및 공유</div>
-                <h2>생성형 AI로 몽타주 만들기</h2>
+  <!-- STEP 5: 몽타주 생성 + 패들렛 공유 -->
+<div class="step" id="step5">
+  <div class="card card-steps">
+    
+    <div class="badge">📸 LEVEL 5. 몽타주 생성 및 공유</div>
+    <h2>생성형 AI로 몽타주 만들기</h2>
 
-                <p style="margin-top:8px;">
-                    1. 아래 완성 프롬프트를 복사합니다.<br>
-                    2. Bing Image Creator 또는 ChatGPT 이미지 생성을 열어 프롬프트를 붙여넣고 이미지를 만듭니다.<br>
-                    3. 완성된 이미지를 각 학교 패들렛 보드에 업로드합니다.
-                </p>
+    <p>
+      1. 아래 완성 프롬프트를 복사합니다.<br>
+      2. 뤼튼·ChatGPT 이미지 생성 또는 무료 이미지 사이트에서 이미지를 만듭니다.<br>
+      3. 완성된 이미지를 각 학교 패들렛 보드에 업로드합니다.
+    </p>
 
-                <div class="label" style="margin-top:14px;">✔ 완성된 프롬프트 (한글)</div>
-                <div id="finalPrompt" class="prompt-box">
-                    아직 프롬프트가 생성되지 않았습니다.
-                </div>
+    <!-- 완성된 프롬프트 -->
+    <div class="label" style="margin-top:14px;">✔ 완성된 프롬프트 (한글)</div>
+    <div id="finalPrompt" class="prompt-box">아직 프롬프트가 생성되지 않았습니다.</div>
 
-                <div class="btn-row no-print">
-                    <button class="btn-outline" onclick="goStep(4)">← 이전으로</button>
-                    <button class="btn" style="flex:1" onclick="copyFinalPrompt()">
-                        📋 프롬프트 복사하기
-                    </button>
-                </div>
-
-                <div class="btn-row no-print">
-                    <button class="btn btn-outline" onclick="openBing()">
-                        Bing Image Creator 열기 (새창)
-                    </button>
-                    <button class="btn btn-outline" onclick="openChatGPT()">
-                        ChatGPT 이미지 생성 열기 (새창)
-                    </button>
-                </div>
-
-                <!-- 패들렛 코드 입력 영역 -->
-                <div class="label" style="margin-top:18px;">학교 패들렛 코드</div>
-                <div style="display:flex; gap:8px; margin-top:4px;">
-                    <input id="padletCode" placeholder="예: ss (보드 주소 뒤에 오는 코드)">
-                    <button class="btn-outline no-print" style="white-space:nowrap;" onclick="openPadletBoard()">
-                        패들렛 보드 열기 (새창)
-                    </button>
-                </div>
-                <p class="small">
-                    이 칸에 코드를 입력하면<br>
-                    <strong>https://padlet.com/edusy/코드</strong> 주소로 몽타주를 업로드할 수 있는 보드를 엽니다.<br>
-                    (예: 코드가 <code>ss</code>이면 <code>https://padlet.com/edusy/ss</code>)
-                </p>
-            </div>
-
-            <button class="btn no-print" onclick="analyzeResult()">
-                결과 분석 단계로 이동하기 🔎
-            </button>
-        </div>
+    <!-- 버튼: 복사하기 / 이전으로 -->
+    <div class="btn-row no-print" style="margin-top:20px;">
+      <button class="btn-back" onclick="goStep(4)">⬅ 이전으로</button>
+      <button class="btn-copy" onclick="copyFinalPrompt()">📋 프롬프트 복사하기</button>
     </div>
+
+    <!-- 이미지 생성 도구 -->
+    <div class="btn-row no-print" style="margin-top:25px;">
+      <button class="btn-blue" onclick="openWrtn()">뤼튼 이미지 생성 열기</button>
+      <button class="btn-purple" onclick="openChatGPT()">ChatGPT 이미지 생성 열기</button>
+      <button class="btn-dark" onclick="openPixabay()">Pixabay 무료 이미지 찾기</button>
+    </div>
+
+    <!-- 패들렛 입력 -->
+    <div class="label" style="margin-top:24px;">📌 학교 패들렛 코드</div>
+    <input id="padletCode" class="input-code" placeholder="예: ss (보드 주소 뒤에 오는 코드)">
+    
+    <button class="btn-padlet" onclick="openPadletBoard()">패들렛 보드 열기 (새창)</button>
+
+    <p class="small">
+      이 칸에 코드를 입력하면<br>
+      https://padlet.com/edusy/<b>코드</b> 주소로 몽타주를 업로드할 수 있는 보드를 엽니다.<br>
+      (예: 코드가 ss이면 https://padlet.com/edusy/ss )
+    </p>
+
+    <!-- 결과 분석 단계 이동 -->
+    <button class="btn-next" onclick="goStep(6)">🔍 결과 분석 단계로 이동하기</button>
+
+  </div>
+</div>
+
+<!-- ★ 버튼 스타일 CSS 추가 ★ -->
+<style>
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .btn-blue {
+    flex: 1;
+    background: #2979ff;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-purple {
+    flex: 1;
+    background: #7e57c2;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-dark {
+    flex: 1;
+    background: #455a64;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-copy {
+    flex: 1;
+    background: #4caf50;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-back {
+    flex: 0.5;
+    background: white;
+    color: #333;
+    border: 2px solid #333;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn-padlet {
+    margin-top: 10px;
+    width: 100%;
+    background: #009688;
+    color: white;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-next {
+    margin-top: 25px;
+    width: 100%;
+    background: #26a69a;
+    color: white;
+    padding: 16px;
+    border-radius: 10px;
+    border: none;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .input-code {
+    margin-top: 6px;
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+  }
+  .small {
+    font-size: 13px;
+    color: #777;
+    margin-top: 8px;
+  }
+</style>
+
+<!-- JavaScript 링크 열기 함수 -->
+<script>
+  function openWrtn() { window.open("https://wrtn.ai/", "_blank"); }
+  function openChatGPT() { window.open("https://chat.openai.com/?model=gpt-image-1", "_blank"); }
+  function openPixabay() { window.open("https://pixabay.com/ko/", "_blank"); }
+</script>
+
 
     <!-- STEP 6: 최종 성찰 Q1, Q2 -->
     <div class="step" id="step6">
@@ -950,4 +1052,5 @@ window.addEventListener("load", () => {
 </script>
 </body>
 </html>
+
 
